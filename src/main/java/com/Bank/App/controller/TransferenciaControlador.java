@@ -52,7 +52,9 @@ public class TransferenciaControlador {
 		Transferencia transferencia = repositorio.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No existe la transferencia con ID: " + id));
 
-		transferencia.setId(detallesTransferencia.getId());
+               // La ID de la transferencia debe mantenerse igual que la indicada en la URL
+               // para evitar inconsistencias si el cuerpo de la petición contiene un valor diferente
+               transferencia.setId(id);
 		transferencia.setId_ordenante(detallesTransferencia.getId_ordenante());
 		transferencia.setId_beneficiario(detallesTransferencia.getId_beneficiario());
 		transferencia.setImporte(detallesTransferencia.getImporte());
