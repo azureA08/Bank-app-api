@@ -53,7 +53,9 @@ public class MensajeControlador {
 		Mensaje mensaje = repositorio.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No existe el mensaje con ID: " + id));
 
-		mensaje.setId(detallesMensaje.getId());
+               // La ID del mensaje debe coincidir con la indicada en la URL
+               // para evitar que se modifique accidentalmente mediante el cuerpo
+               mensaje.setId(id);
 		mensaje.setId_origen(detallesMensaje.getId_origen());
 		mensaje.setId_destino(detallesMensaje.getId_destino());
 		mensaje.setTexto(detallesMensaje.getTexto());
